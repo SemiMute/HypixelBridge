@@ -1,7 +1,7 @@
 const Application = require('../../Application')
 const DiscordCommand = require('../../contracts/DiscordCommand')
 const Hypixel = require(`hypixel-api-reborn`); //npm package for hypixel api
-const hypixel = new Hypixel.Client('8b07f7c4-690f-4cbe-8c36-a0af15e9bbf7'); // api key for hypixel
+const hypixel = new Hypixel.Client('e5173f0f-00fc-4a05-99b7-840e796d1f84'); // api key for hypixel
 const { Utils } = require('hypixel-api-reborn');
 const db = require(`../../../db`)
 const moment = require(`moment`)
@@ -58,7 +58,7 @@ class WhitelistCommand extends DiscordCommand {
         let uuid = await hypixel.getPlayer(args[1]).then(player => player.uuid).catch()
         let nign = await Utils.toIGN(uuid);
         let check = whitelist.find(c=>c.UUID == uuid)
-        let time = check.Expires - Date.now() 
+        let time = check.Expires - Date.now()
         let times = pms(time, {verbose: true})
 
         if(time < 0){
@@ -98,9 +98,9 @@ class WhitelistCommand extends DiscordCommand {
                         embed: {
                             title: "Already Whitelisted!",
                             description: `This user is already whitelisted for another **${pms(check.Expires - Date.now())}**
-    
+
                             Add more time to their timer by doing !whitelist addtime ${nign} (time)`
-    
+
                         }
                     })
                 } else {
