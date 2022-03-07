@@ -4,10 +4,13 @@ function numberWithCommas(x) {
   x = x.toString().split(".")[0]
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-async function getStatsFromUsername(name){
-  try{
-    const { data } = await axios.get('https://api.altpapier.dev/v1/profiles/'+name+'?key=IPke2LEKG1ShqOlY8KIM7Uv8oA05p6Ek')
+function round(value, precision) {
+  var multiplier = Math.pow(10, precision || 0);
+  return Math.round(value * multiplier) / multiplier;
+}
+async function getStatsFromUsername(name) {
+  try {
+    const { data } = await axios.get('https://api.altpapier.dev/v1/profiles/' + name + '?key=IPke2LEKG1ShqOlY8KIM7Uv8oA05p6Ek')
     let nw = numberWithCommas(data.data[0].networth.total_networth)
     let farming = data.data[0].skills.farming.level
     let mining = data.data[0].skills.mining.level
@@ -17,29 +20,29 @@ async function getStatsFromUsername(name){
     let enchant = data.data[0].skills.enchanting.level
     let alch = data.data[0].skills.alchemy.level
     let taming = data.data[0].skills.taming.level
-    let sa = round((farming+mining+combat+foraging+fishing+enchant+alch+taming)/8,1)
+    let sa = round((farming + mining + combat + foraging + fishing + enchant + alch + taming) / 8, 1)
     let cata = numberWithCommas(data.data[0].dungeons.catacombs.skill.level)
     let wslayer = data.data[0].slayer.wolf.xp
     let zslayer = data.data[0].slayer.zombie.xp
     let sslayer = data.data[0].slayer.spider.xp
     let eslayer = data.data[0].slayer.enderman.xp
-    let slayer = numberWithCommas(wslayer+zslayer+sslayer+eslayer)
+    let slayer = numberWithCommas(wslayer + zslayer + sslayer + eslayer)
     let stats = `Skill Avg: ${sa}; Slayer: ${slayer}; Cata: ${cata}; Networth: $${nw}`
     return stats
   }
-  catch{
+  catch {
     return "Error"
   }
 }
 class StatsCommand extends DiscordCommand {
     constructor(discord) {
       super(discord)
-  
+
       this.name = 'stats'
       this.aliases = ['skills']
       this.description = `Checks user's stats`
     }
-  
+
     onCommand(message) {
         let args = this.getArgs(message)
         let user = args.shift()
@@ -54,5 +57,5 @@ class StatsCommand extends DiscordCommand {
         })
     }
   }
-  
+
   module.exports = StatsCommand
