@@ -183,7 +183,6 @@ class StateHandler extends EventHandler {
        }
        return result.join('');
     }
-    // test push
     if(message.includes(`!timer`)){
       let whitelist = await db.get(`wl`) || []
       let uuid = await hypixel.getPlayer(user).then(player => player.uuid).catch()
