@@ -90,6 +90,7 @@ class StateHandler extends EventHandler {
     if (this.isPartyInvite(message)) {
       let username = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[1]
       var whitelist = await db.get(`wl`) || []
+      console.log(username)
       if(username == "Mouse_Odious"){
         this.bot.chat(`/party accept ${username}`)
         await delay(1000)
@@ -97,6 +98,7 @@ class StateHandler extends EventHandler {
         await delay(4000)
         return this.bot.chat(`/party leave`)
       }
+      return;
       try {
         let uuid = await hypixel.getPlayer(username).then(player => player.uuid).catch()
         var found = whitelist.find(c=>c.UUID == uuid)
