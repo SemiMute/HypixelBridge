@@ -1,5 +1,9 @@
 # Hypixel Discord Chat Bridge
 
+## NOTE
+This is a fork from Senither's Hypixel Bridge, witha  few extra things, like a working fragbot for skyblock.
+((Please note, that you need to setup an AFK pool on a skyblock island that the account will be teleporting to))
+
 A two-way chat bridge between [Hypixel](https://hypixel.net/) guild chat and a [Discord](https://discord.com/) channel. The application utilizes [Discord.js-light](https://github.com/timotejroiko/discord.js-light) for communicating with Discord, and [Mineflayer](https://github.com/PrismarineJS/mineflayer) for communicating with Hypixel.
 
 > This application will login to Hypixel using Mineflayer which is not a normal Minecraft client, this could result in your Minecraft account getting banned from Hypixel, so use this application at your own risk.
